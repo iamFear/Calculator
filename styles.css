@@ -2,6 +2,7 @@
 
 :root {
   --main-text-color: #f8fafc;
+  --grey-bg-color: #27272a;
 }
 
 /* General Classes */
@@ -43,9 +44,9 @@ main {
   grid-template-columns: repeat(4, 1fr);
   align-items: center;
   justify-items: center;
-  gap: 10px;
+  gap: 16.5px;
 
-  padding: 35px 50px;
+  padding: 35px 35px;
   border-radius: 50px;
   background-color: #000000ad;
 }
@@ -58,7 +59,7 @@ main {
   grid-column: 1 / -1;
 
   border: 0;
-  background-color: black;
+  background-color: rgba(0, 0, 0);
   border-radius: 10000px;
 }
 
@@ -68,11 +69,41 @@ main {
 }
 
 .char-input {
-  background-color: #000;
-  padding: 35px;
-  border-radius: 100000px;
+  padding: 32px;
+  border-radius: 19%;
+
+  transition: 0.1s all;
 }
 
 .char-special {
-  padding: 35px 31.5px !important;
+  padding: 31.8px 24px !important;
+  background-color: rgba(220, 38, 38, 0.25);
+}
+
+.char-special:hover {
+  background-color: rgba(220, 38, 38, 0.5);
+}
+
+.char--number {
+  background-color: var(--grey-bg-color);
+}
+
+.char--number:hover {
+  background-color: rgb(82, 82, 91, 0.75);
+}
+
+.char--operator {
+  background-color: rgba(245, 159, 11, 0.5);
+}
+
+.char--operator:hover {
+  background-color: rgba(245, 159, 11, 0.8);
+}
+
+.char--equal {
+  background-color: rgba(249, 116, 22, 0.5);
+}
+
+.char--equal:hover {
+  background-color: rgba(249, 116, 22, 0.8);
 }
