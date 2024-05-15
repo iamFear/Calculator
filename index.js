@@ -2,60 +2,83 @@
 
 // Functions:
 
-// Display the output
-const displayOutput = (output) => {
-  resultOutput.value = output;
-};
-
-// Clear the UI and all the variables history (only for AC button)
-const allClear = () => {
+// Set only the UI back to 0
+const clearUI = () => {
+  currentDisplay = "";
   resultOutput.value = 0;
-  output = "";
-};
-// Clear the UI, keeping the variables intact (only for Operators buttons)
-const clearOutput = () => {
-  resultOutput.value = 0;
-  output = "";
 };
 
-// DOM Selection:
-
-// UI Output
+// DOM Elements:
+// Output / Display element:
 const resultOutput = document.querySelector(".result");
-// AC Button
-const acBtn = document.querySelector(".char--ac");
-// Number Buttons
-const numberBtns = document.querySelectorAll(".char--number");
-// Operators Buttons
+// Operators buttons:
 const opBtns = document.querySelectorAll(".char--operator");
+// Numbers buttons:
+const numBtns = document.querySelectorAll(".char--number");
+// Equal button:
+const equalBtn = document.querySelector(".char--equal");
+// AC button:
+const acBtn = document.querySelector(".char--ac");
 
-// Setting the output value by default to 0
+// App:
+
+// Set UI result to 0
 resultOutput.value = 0;
 
-// Variables:
-
+// Track what is being displayed in the UI
+let currentDisplay = "";
+// Tracks the numbers, operations and results that we are going to eval
 let output = "";
 
 // Event Listeners:
 
-// Number Buttons functionality:
-numberBtns.forEach((btn) =>
+// Display the number on the UI and add it to the output
+numBtns.forEach((btn) => {
   btn.addEventListener("click", () => {
-    // Capture the input number and display it in the UI
-    output += btn.textContent;
-    displayOutput(output);
-  })
-);
+    output = output + btn.textContent;
+    currentDisplay = currentDisplay + btn.textContent;
 
-// AC button functionality: clean UI and operations history
-acBtn.addEventListener("click", () => {
-  allClear();
+    resultOutput.value = currentDisplay;
+
+    console.log(currentDisplay);
+    console.log(output);
+  });
 });
 
-// Operators button functionality
+// Add the operator to the output and reset the UI result back to 0
 opBtns.forEach((btn) => {
   btn.addEventListener("click", () => {
-    // Remove the current value from the UI and set it back to 0
-    clearOutput();
+    if (btn.textContent === "÷") {
+      output = output + "/";
+    } else if (btn.textContent === "x") {
+      output = output + "*";
+    } else {
+      output = output + btn.textContent;
+    }
+
+    clearUI();
+
+    console.log(currentDisplay);
+    console.log(output);
   });
+});
+
+// Use the "eval" function to display the result of the current output / operation,
+// and set the operation to the result of the eval
+equalBtn.addEventListener("click", () => {
+  const result = eval(output);
+  resultOutput.value = result;
+  output = String(result);
+
+  console.log(result);
+  console.log(output);
+});
+
+// Reset both the result value and UI
+acBtn.addEventListener("click", () => {
+  clearUI();
+  output = "";
+
+  console.log(currentDisplay);
+  console.log(output);
 });
