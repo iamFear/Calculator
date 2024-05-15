@@ -48,6 +48,16 @@ numBtns.forEach((btn) => {
 // Add the operator to the output and reset the UI result back to 0
 opBtns.forEach((btn) => {
   btn.addEventListener("click", () => {
+    // Avoid repeating operators:
+    if (
+      output[output.length - 1] === "+" ||
+      output[output.length - 1] === "-" ||
+      output[output.length - 1] === "/" ||
+      output[output.length - 1] === "*"
+    ) {
+      return;
+    }
+
     if (btn.textContent === "÷") {
       output = output + "/";
     } else if (btn.textContent === "x") {
